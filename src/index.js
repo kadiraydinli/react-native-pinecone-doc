@@ -1,0 +1,10 @@
+export { default as Alert  } from './components/Alert';
+export { default as Text } from "./components/Text";
+export { default as Button } from "./components/Button";
+export { default as Badge } from "./components/Badge";
+export { default as Avatar } from "./components/Avatar";
+export { default as Card } from "./components/Card";
+export { default as Clock } from "./components/Clock";
+export { default as Divider } from "./components/Divider";
+export { default as Modal } from "./components/Modal";
+export { default as Slider } from "./components/Slider";

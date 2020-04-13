@@ -1,0 +1,32 @@
+---
+name: Text
+router: /Text
+menu: Components
+---
+
+import { Playground, Props } from 'docz'
+import {Text} from '../../src'
+
+# Text
+
+## Usage
+
+<Playground>
+  <Text>Some message</Text>
+</Playground>
+
+<Playground>
+<Text fontSize={25} color="red">Some message</Text>
+</Playground>
+
+<Playground style={{flexDirection: "row"}}>
+  <Text primary>Some message</Text>
+  <Text success>Some message</Text>
+  <Text info>Some message</Text>
+  <Text danger>Some message</Text>
+  <Text warning>Some message</Text>
+</Playground>
+
+## Properties
+
+<Props of={Text} />

@@ -1,0 +1,31 @@
+{
+  "name": "react-native-pinecone",
+  "version": "1.0.0",
+  "description": "React Native Pinecone - React Native Components",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docz:dev": "docz dev",
+    "docz:build": "docz build",
+    "docz:serve": "docz build && docz serve"
+  },
+  "keywords": [
+    "react-native",
+    "reactnative",
+    "react-native-pinecone",
+    "pinecone",
+    "component"
+  ],
+  "author": "Kadir Aydınlı",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^16.12.0",
+    "react-native": "^0.61.5"
+  },
+  "devDependencies": {
+    "docz": "^2.2.0",
+    "react-art": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-native-web": "^0.12.0-rc.1"
+  }
+}

@@ -26,7 +26,7 @@ const Divider = (props) => {
     ]
 
     return (
-        <View style={{ flexDirection: "row", width: "100%", alignItems: "center" }}>
+        <View style={styles.container}>
             <View style={StyleSheet.flatten([viewStyle, titlePositionStyle[0][0]])} />
             <Text style={[StyleSheet.flatten([{ color: color }, titleColor && { color: titleColor }, titleStyle])]}>{title}</Text>
             <View style={StyleSheet.flatten([viewStyle, titlePositionStyle[0][1]])} />
@@ -35,19 +35,19 @@ const Divider = (props) => {
 };
 
 Divider.propTypes = {
-    /** Divider metni */
+    /** Bileşen başlığı */
     title: PropTypes.string,
-    /** Divider metin rengi */
+    /** Başlığın rengi */
     titleColor: PropTypes.string,
-    /** Divider metin stili */
+    /** Başlığın stili  */
     titleStyle: PropTypes.object,
-    /** Divider metin pozisyonu */
+    /** Başlığın konumu */
     titlePosition: PropTypes.oneOf(["left", "center", "right"]),
-    /** Divider rengi */
+    /** Bileşen rengi */
     color: PropTypes.string,
     /** Divider kalınlığı */
     thickness: PropTypes.number,
-    /** Stil */
+    /** Genel stil */
     style: PropTypes.object
 };
 
@@ -60,6 +60,11 @@ Divider.defaultProps = {
 };
 
 const styles = StyleSheet.create({
+    container: {
+        width: "100%",
+        flexDirection: "row",
+        alignItems: "center"
+    },
     divider: {
         margin: "3.5%",
         //width: "40%",

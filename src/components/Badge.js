@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View} from 'react-native';
-import {Text} from '..';
+import { StyleSheet, View } from 'react-native';
+import { Text } from '..';
 
 const Badge = (props) => {
     const {
@@ -16,29 +16,34 @@ const Badge = (props) => {
         style,
     } = props;
 
-    return(
-        <View style={StyleSheet.flatten([styles.badge, color && {backgroundColor: color},
-            primary && { backgroundColor: '#2457ff' }, success && { backgroundColor: '#19ff5a' },
-            info && { backgroundColor: '#24dbff' }, warning && { backgroundColor: '#ffc619' },
-            danger && { backgroundColor: '#c41d1d' }, style ])}>
+    return (
+        <View style={StyleSheet.flatten([styles.container, color && { backgroundColor: color },
+        primary && { backgroundColor: '#2457ff' }, success && { backgroundColor: '#19ff5a' },
+        info && { backgroundColor: '#24dbff' }, warning && { backgroundColor: '#ffc619' },
+        danger && { backgroundColor: '#c41d1d' }, style])}>
             <Text style={StyleSheet.flatten([{ fontSize: 12, color: "white" }, valueStyle])}>{value}</Text>
         </View>
     )
 };
 
 Badge.propTypes = {
-    /** Rozet metin değeri */
+    /** Bileşen metini */
     value: PropTypes.string,
-    /** Rozet metin stili */
+    /** Bileşen metin stili */
     valueStyle: PropTypes.object,
-    /** Rozet rengi */
+    /** Renk */
     color: PropTypes.string,
+    /** Özel renk */
     primary: PropTypes.bool,
+    /** Özel renk */
     success: PropTypes.bool,
+    /** Özel renk */
     info: PropTypes.bool,
+    /** Özel renk */
     warning: PropTypes.bool,
+    /** Özel renk */
     danger: PropTypes.bool,
-    /** Stil */
+    /** Genel stil */
     style: PropTypes.object
 };
 
@@ -55,7 +60,7 @@ Badge.defaultProps = {
 };
 
 const styles = StyleSheet.create({
-    badge: {
+    container: {
         justifyContent: "center",
         alignItems: "center",
         borderRadius: 18,

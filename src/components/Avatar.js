@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, Image, TouchableOpacity, View} from 'react-native';
-import {Text} from '..';
+import { StyleSheet, Image, TouchableHighlight, View } from 'react-native';
+import { Text, Icon } from '../../src';
 
 const avatarSizes = {
     small: 50,
@@ -13,21 +13,22 @@ const Avatar = (props) => {
     const {
         source,
         onPress,
-        Component = onPress ? TouchableOpacity : View,
+        Component = onPress ? TouchableHighlight : View,
         size,
         value,
         valueStyle,
-        icon,
+        icon, //{name, color, size, type}
         avatarStyle,
+        backgroundColor,
         type,
         avatarMini,
         avatarMiniPosition,
         avatarMiniOnPress,
-        MiniComponent = avatarMiniOnPress ? TouchableOpacity : View,
+        MiniComponent = avatarMiniOnPress ? TouchableHighlight : View,
         style,
     } = props;
 
-    const width = size ? avatarSizes[size] : 50;
+    const width = size ? typeof size == 'number' ? size : avatarSizes[size] : 50;
     const fontSize = width / 2;
 
     const selectedType = [
@@ -38,24 +39,28 @@ const Avatar = (props) => {
     const avatarMiniStyle = { width: width / 3, height: width / 3, position: "absolute" };
 
     const avatarMiniPositionStyle = [
-        avatarMiniPosition == "topLeft" && { alignSelf: "flex-start", top: 0},
-        avatarMiniPosition == "topRight" && { alignSelf: "flex-end", top: 0}, 
-        avatarMiniPosition == "bottomLeft" && { alignSelf: "flex-start", bottom: 0}, 
-        avatarMiniPosition == "bottomRight" && { alignSelf: "flex-end", bottom: 0},
+        avatarMiniPosition == "topLeft" && { alignSelf: "flex-start", top: 0 },
+        avatarMiniPosition == "topRight" && { alignSelf: "flex-end", top: 0 },
+        avatarMiniPosition == "bottomLeft" && { alignSelf: "flex-start", bottom: 0 },
+        avatarMiniPosition == "bottomRight" && { alignSelf: "flex-end", bottom: 0 },
     ];
-    
-    const selectedComponent = (
-        (value && (<Text fontSize={fontSize} color="white" style={valueStyle}>{value}</Text>) || 
-            source && (<Image source={source} style={
-                StyleSheet.flatten([{width: width, height: width}, selectedType, avatarStyle])} />))
-    );
 
-    return(
-        <Component onPress={onPress} 
-            style={StyleSheet.flatten([styles.Avatar, {width: width, height: width}, selectedType, style])}>
-            {selectedComponent}
-            <MiniComponent onPress={avatarMiniOnPress} 
-                style={[avatarMiniStyle, avatarMiniPositionStyle]}>{avatarMini}</MiniComponent>
+    const selectedComponent = [
+        value && (<Text key={0} fontSize={fontSize} color="white" style={valueStyle}>{value}</Text>),
+        icon && (<Icon key={1} name={icon.name} color={icon.color} size={icon.size ? icon.size : width / 2} type={icon.type} />),
+        source && (<Image key={2} source={source} style={
+            StyleSheet.flatten([{ width: width, height: width }, selectedType, avatarStyle])} />)
+    ];
+
+    return (
+        <Component onPress={() => alert("kdlsfş")}
+            style={StyleSheet.flatten([styles.container, { width: width, height: width, backgroundColor: backgroundColor }, 
+                selectedType, style])}>
+            <>
+                {selectedComponent}
+                <MiniComponent onPress={avatarMiniOnPress}
+                    style={[avatarMiniStyle, avatarMiniPositionStyle]}>{avatarMini}</MiniComponent>
+            </>
         </Component>
     )
 };
@@ -63,12 +68,13 @@ const Avatar = (props) => {
 Avatar.propTypes = {
     /** Görüntü kaynağı */
     source: PropTypes.object,
-    /** Bileşene dokununca olacak işlev */
+    /** Dokununca gerçekleşecek işlem */
     onPress: PropTypes.func,
-    Component: PropTypes.oneOf([View, TouchableOpacity]),
+    Component: PropTypes.oneOf([View, TouchableHighlight]),
     /** Avatar boyutu */
-    size: PropTypes.oneOf(["small", "medium", "large"]),
-    /** Avatar metni */
+    size: PropTypes.oneOf(["small", "medium", "large", PropTypes.number]),
+    size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    /** Avatar metini */
     value: PropTypes.string,
     /** Avatar metin stili */
     valueStyle: PropTypes.object,
@@ -76,25 +82,24 @@ Avatar.propTypes = {
     icon: PropTypes.object,
     /** Avatar stili */
     avatarStyle: PropTypes.object,
+    /** Arkaplan rengi */
+    backgroundColor: PropTypes.string,
     /** Avatar tipi */
     type: PropTypes.oneOf(["square", "rounded"]),
-    /** Avatar'ın istenilen köşesine istenilen bileşenin koyulmasını sağlar. */
+    /** Bileşenin köşelerine yerleştirilecek element */
     avatarMini: PropTypes.element,
-    /** Avatar mininin pozisyonu */
+    /** Bileşenin köşelerine yerleştirilecek element konumu */
     avatarMiniPosition: PropTypes.string,
-    /** Avatar miniye dokununca olacak işlev */
+    /** Bileşenin köşelerine yerleştirilecek elemente dokununca gerçekleşecek işlemi */
     avatarMiniOnPress: PropTypes.func,
-    MiniComponent: PropTypes.oneOf([View, TouchableOpacity]),
+    MiniComponent: PropTypes.oneOf([View, TouchableHighlight]),
     /** Genel stil */
     style: PropTypes.object
 };
 
 Avatar.defaultProps = {
-    source: {},
     size: "medium",
-    value: "",
     valueStyle: {},
-    icon: {},
     avatarStyle: {},
     type: "rounded",
     avatarMiniPosition: "bottomRight",
@@ -102,7 +107,7 @@ Avatar.defaultProps = {
 };
 
 const styles = StyleSheet.create({
-    Avatar: {
+    container: {
         backgroundColor: "gray",
         justifyContent: "center",
         alignItems: "center",

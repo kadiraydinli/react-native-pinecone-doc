@@ -1,1 +1,7 @@
-export { default as Colors } from './Colors';
+import Colors from './Colors';
+import Icons from './Icons';
+
+export {
+    Colors,
+    Icons
+}

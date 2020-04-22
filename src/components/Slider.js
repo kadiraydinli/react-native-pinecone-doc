@@ -1,105 +1,148 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, View, ScrollView, Image, Dimensions, Animated } from 'react-native';
-
-const DEVICE_WIDTH = Dimensions.get('window').width;
-const SCROLLVIEW_REF = 'scrollview';
-//var timerId;
-
-function _startAutoPlay() {
-    this.timerId = setInterval(_goToNext,1000);
-}
-
-function _stopAutoPlay() {
-    if(this.timerId) {
-        clearInterval(this.timerId);
-        this.timerId = null;
-    }
-}
-
-function _goToNext() {
-    let nextIndex = this._currentIndex + 1 % this._childrenCount;
-    this.refs[SCROLLVIEW_REF].scrollTo({x:200*nextIndex})
-}
-
-function _onScroll(event) {
-    //let {height} = event.nativeEvent.layout;
-}
+import { StyleSheet, View, Platform, Text, PanResponder, Animated, Button } from 'react-native';
+import { Icon } from "..";
 
 const Slider = (props) => {
-    const [autoPlay, setAutoPlay] = useState(false);
-
-    const xOffset = new Animated.Value(0);
-    const onScroll = Animated.event([{ nativeEvent: { contentOffset: { x: xOffset } } }]);
-
     const {
-        images,
-        style
+        //value,
+        onValueChange,
+        step,
+        minimumValue,
+        maximumValue,
+        color,
+        trackColor,
+        trackSize,
+        thumbColor,
+        thumbSize,
+        size,
     } = props;
 
+    /*const pan = useRef(new Animated.ValueXY()).current;
+
+    const panResponder = useRef(PanResponder.create({
+        onMoveShouldSetPanResponder: () => true,
+        onPanResponderGrant: () => {
+            pan.setOffset({
+                x: pan.x._value
+            })
+        },
+        onPanResponderMove: Animated.event([
+            null,
+            { dx: pan.x }
+        ]),
+        onPanResponderEnd: () => {
+            pan.flattenOffset();
+        }
+    })).current;*/
+
+    const position = new Animated.ValueXY();
+
+    const [width, setWidth] = useState(0);
+    const [value, setValue] = useState(0);
+
+    const [veri, setVeri] = useState(0);
+    const [data, setData] = useState(0);
+
+    const panResponder = PanResponder.create({
+        onStartShouldSetPanResponder: () => true,
+        onPanResponderMove: (evt, gestureState) => onMove(gestureState),
+        onPanResponderRelease: (evt, gestureState) => onEndMove()
+    })
+    
+    const getBottomOffsetFromValue = (value) => {
+        if(width == null) return 0;
+        const valueOffset = value - minimumValue;
+        const totalRange = maximumValue - minimumValue;
+        const percentage = valueOffset - totalRange;
+        return width * percentage;
+    }
+
+    const onMove = (gestureState) => {
+        const newDeltaValue = getValueFromOffset(gestureState.dx);
+        alert(newDeltaValue)
+        setValue(newDeltaValue);
+    }
+
+    const onEndMove = () => {
+        setValue(value)
+    }
+
+    const getValueFromOffset = (offset) => {
+        if (width == null) return 0;
+        return ((maximumValue - minimumValue) * offset) / width;
+    }
+
+
+    const onLayout = (i) => {
+        const {width} = i.nativeEvent.layout
+        setWidth(width)
+    }
+
     useEffect(() => {
-        if(autoPlay) _startAutoPlay();
-    }, []);
+        //alert(JSON.stringify(position))
+    })
 
     return (
-        <View style={{ height: "100%", width: "100%" }}>
-            <ScrollView onLayout={_onScroll()}
-                horizontal
-                showsHorizontalScrollIndicator={false}
-                snapToEnd
-                pagingEnabled>
-                {images.map(image => (
-                    <Image resizeMode="cover" source={{ uri: image}} key={image} style={styles.image} />
-                ))}
-            </ScrollView>
-            <View style={styles.circleView}>
-                {images.map((image, i) => (
-                    <View key={image} style={[styles.circle]} />
-                ))}
-            </View>
+        <View style={styles.container}>
+            <Text>gesture: {data}</Text>
+            <Text>view: {veri}</Text>
+            <Button title="tıkla" onPress={() => alert(JSON.stringify(position))} />
+            <View style={styles.track} onLayout={onLayout} />
+            <Animated.View style={{ width: 50, height: 50, backgroundColor: "green", transform: [{ translateX: position.x }] }}
+                {...panResponder.panHandlers}>
+                <View style={styles.thumb} />
+            </Animated.View>
         </View>
     )
 };
 
 Slider.propTypes = {
-    title: PropTypes.string,
-    titleColor: PropTypes.string,
-    titleStyle: PropTypes.object,
-    titlePosition: PropTypes.oneOf(["left", "center", "right"]),
+    //value: PropTypes.number,
+    onValueChange: PropTypes.func,
+    step: PropTypes.number,
+    minimumValue: PropTypes.number,
+    maximumValue: PropTypes.number,
     color: PropTypes.string,
-    thickness: PropTypes.number,
-    style: PropTypes.object
+    trackColor: PropTypes.string,
+    trackSize: PropTypes.number,
+    thumbColor: PropTypes.string,
+    thumbSize: PropTypes.number,
+    size: PropTypes.number,
 };
 
 Slider.defaultProps = {
-    title: "",
-    titleStyle: {},
-    titlePosition: "center",
-    thickness: 1,
-    style: {}
+    minimumValue: 0,
+    maximumValue: 100,
+    step: 1
 };
 
+
 const styles = StyleSheet.create({
-    image: {
-        height: "100%",
-        width: DEVICE_WIDTH
-    },
-    circleView: {
-        position: "absolute",
-        bottom: 15,
-        width: "100%",
-        height: 10,
-        display: "flex",
-        flexDirection: "row",
+    container: {
+        //flex: 1,
+        //width: "100%",
+        //height: 40,
+        backgroundColor: "red",
+        //alignItems: "center",
         justifyContent: "center",
-        alignItems: "center"
+        ...Platform.select({
+            default: { elevation: 2 },
+            ios: {}
+        })
     },
-    circle: {
-        width: 6,
-        height: 6,
-        borderRadius: 3,
-        margin: 5,
-        backgroundColor: "#fff"
+    track: {
+        width: "100%",
+        height: 20,
+        position: "absolute",
+        backgroundColor: "green"
+    },
+    thumb: {
+        //position: "absolute",
+        height: 50,
+        width: 50,
+        backgroundColor: "blue",
+        borderRadius: 50
     }
 });
 

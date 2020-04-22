@@ -1,84 +1,82 @@
 import React from 'react';
-import PropTypes from 'prop-types'
-import { Text as RNText } from 'react-native';
+import PropTypes from 'prop-types';
+import { StyleSheet, Text as RNText } from 'react-native';
 import { Colors } from '../config';
 
-/*const headingDeafults = {
-    h1: 32,
-    h2: 24,
-    h3: 19,
-    h4: 16,
-    h5: 14,
-    h6: 11,
-}*/
+const Text = props => {
+  const {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    primary,
+    success,
+    info,
+    warning,
+    danger,
+    color,
+    children,
+    fontSize,
+    style,
+    ...rest
+  } = props;
 
-const Text = ({
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  primary,
-  success,
-  info,
-  warning,
-  danger,
-  color,
-  children,
-  fontSize,
-  style,
-  ...rest
-}) => (
-  <RNText
-    style={[
-      h1 && { fontSize: 32 },
-      h2 && { fontSize: 24 },
-      h3 && { fontSize: 19 },
-      h4 && { fontSize: 16 },
-      h5 && { fontSize: 14 },
-      h6 && { fontSize: 11 },
-      color && { color: color },
-      fontSize && { fontSize: fontSize },
-      primary && { color: Colors.primary },
-      success && { color: Colors.success },
-      info && { color: Colors.info },
-      warning && { color: Colors.warning },
-      danger && { color: Colors.danger },
-      style
-    ]}
-    {...rest}
-  >
-    {children}
-  </RNText>
-);
+  return (
+    <RNText
+      style={StyleSheet.flatten([
+        h1 && { fontSize: 32 },
+        h2 && { fontSize: 24 },
+        h3 && { fontSize: 19 },
+        h4 && { fontSize: 16 },
+        h5 && { fontSize: 14 },
+        h6 && { fontSize: 11 },
+        color && { color: color },
+        fontSize && { fontSize: fontSize },
+        primary && { color: Colors.primary },
+        success && { color: Colors.success },
+        info && { color: Colors.info },
+        warning && { color: Colors.warning },
+        danger && { color: Colors.danger },
+        style
+      ])} {...rest}>
+      {children}
+    </RNText>
+  );
+};
 
 Text.propTypes = {
-  /** Yazı boyutunu ayarla */
-  fontSize: PropTypes.number,
-  /** Yazı rengini ayarla */
-  color: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  /** Yazı boyutunu 32 yap */
+  /** Yazı tipi boyutu 32 */
   h1: PropTypes.bool,
-  /** Yazı boyutunu 24 yap */
+  /** Yazı tipi boyutu 24 */
   h2: PropTypes.bool,
-  /** Yazı boyutunu 19 yap */
+  /** Yazı tipi boyutu 19 */
   h3: PropTypes.bool,
-  /** Yazı boyutunu 16 yap */
+  /** Yazı tipi boyutu 16 */
   h4: PropTypes.bool,
-  /** Yazı boyutunu 14 yap */
+  /** Yazı tipi boyutu 14 */
   h5: PropTypes.bool,
-  /** Yazı boyutunu 11 yap */
+  /** Yazı tipi boyutu 11 */
   h6: PropTypes.bool,
+  /** Metin rengi */
+  color: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  /** Özel renkler */
   primary: PropTypes.bool,
+  /** Özel renkler */
   success: PropTypes.bool,
+  /** Özel renkler */
   info: PropTypes.bool,
+  /** Özel renkler */
   warning: PropTypes.bool,
+  /** Özel renkler */
   danger: PropTypes.bool,
-  /** Gösterilecek yazı */
+  /**  */
   children: PropTypes.node,
-  /** Stil ver */
-  style: PropTypes.object
+  /** Metin boyutu */
+  fontSize: PropTypes.number,
+  /** Stil */
+  style: PropTypes.object,
 };
 
 Text.defaultProps = {
@@ -93,11 +91,10 @@ Text.defaultProps = {
   info: false,
   warning: false,
   danger: false,
-  color: "black",
-  children: "",
+  color: 'black',
+  children: '',
   fontSize: 16,
-  style: {}
+  style: {},
 };
 
 export default Text;
-

@@ -31,7 +31,7 @@ const Card = (props) => {
 
     return (
         <TouchableOpacity onPress={onPress} {...rest}
-            style={StyleSheet.flatten([styles.Card, {width: widthValue, elevation: shadow}, containerStyle])}>
+            style={StyleSheet.flatten([styles.container, { width: widthValue, elevation: shadow }, containerStyle])}>
             <View>
                 <Image source={image} style={imageStyle} {...rest} />
                 <Text style={[styles.imageTitle, imageTitleStyle]}>{imageTitle}</Text>
@@ -43,19 +43,33 @@ const Card = (props) => {
 };
 
 Card.propTypes = {
+    /** Kart tipi */
     type: PropTypes.string,
+    /** Kart başlığı */
     title: PropTypes.string,
+    /** Kart başlık stili */
     titleStyle: PropTypes.object,
+    /** İçerik */
     content: PropTypes.string,
+    /** İçerik stili */
     contentStyle: PropTypes.object,
+    /** Karta görüntü ekleme */
     image: PropTypes.object,
+    /** Görüntü stili */
     imageStyle: PropTypes.object,
+    /** Görüntü başlığı */
     imageTitle: PropTypes.string,
+    /** Görüntü başlık stili  */
     imageTitleStyle: PropTypes.object,
-    //imageProps: PropTypes.object,
+    /** Image bileşenine iletilecek özellikler */
+    imageProps: PropTypes.object,
+    /** Bileşen gölgesi */
     shadow: PropTypes.number,
+    /** Bileşen gölge stili */
     shadowStyle: PropTypes.object,
+    /** Bileşene dokununca gerçekleşecek işlem */
     onPress: PropTypes.func,
+    /** Genel stil */
     containerStyle: PropTypes.object
 };
 
@@ -66,7 +80,7 @@ Card.defaultProps = {
     content: "",
     contentStyle: {},
     image: {},
-    imageStyle: {width: 200, height: 150},
+    imageStyle: { width: 200, height: 150 },
     imageTitle: "",
     imageTitleStyle: {},
     shadow: 2,
@@ -75,7 +89,7 @@ Card.defaultProps = {
 };
 
 const styles = StyleSheet.create({
-    Card: {
+    container: {
         alignItems: "center",
         //width: "60%",
         justifyContent: "center",

@@ -1,9 +1,9 @@
 import { StyleSheet } from 'react-native';
 
 export default {
-    primary: '#2457ff',
-    success: '#19ff5a',
-    info: '#24dbff',
-    warning: '#ffc619',
-    danger: '#c41d1d'
+    primary: '#0073FF',
+    success: '#28A74A',
+    info: '#179DB8',
+    warning: '#FFB907',
+    danger: '#DC3540'
 }

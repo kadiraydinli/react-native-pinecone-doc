@@ -1,0 +1,32 @@
+---
+name: Snackbar
+menu: Components
+---
+
+import { Playground, Props } from 'docz'
+import { Snackbar } from '../../src/components'
+
+# Snackbar
+Snackbar, isteğe bağlı bir eylemle birlikte kullanıcıya kısa bir mesaj görüntülemek için kullanılır. 
+Genelde ekranın altından animasyonlu şekilde görünür ve kısa bir süre sonra kaybolurlar. 
+React bileşeni olan “Animated.View” bileşeni kullanılarak geliştirilmiştir.
+
+![Tux](../images/snack.png)
+
+## Kullanımı
+
+``` js
+import React from 'react'
+import { Snackbar } from 'react-native-pinecone'
+
+const [visible, setVisible] = useState(false);
+
+<Snackbar 
+    visible={visible}
+    actionOnPress={() => alert("Dokunuldu")} 
+    text="SnackBar - Bottom" />
+```
+
+## Sahne Donanımları (Props)
+
+<Props of={Snackbar} />

@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, View } from 'react-native';
-import { Text } from '..';
+import { Text } from '.';
+import Colors from '../config/Colors';
 
 const Badge = (props) => {
     const {
@@ -18,9 +19,9 @@ const Badge = (props) => {
 
     return (
         <View style={StyleSheet.flatten([styles.container, color && { backgroundColor: color },
-        primary && { backgroundColor: '#2457ff' }, success && { backgroundColor: '#19ff5a' },
-        info && { backgroundColor: '#24dbff' }, warning && { backgroundColor: '#ffc619' },
-        danger && { backgroundColor: '#c41d1d' }, style])}>
+            primary && { backgroundColor: Colors.primary }, success && { backgroundColor: Colors.success },
+        info && { backgroundColor: Colors.info }, warning && { backgroundColor: Colors.warning },
+        danger && { backgroundColor: Colors.danger }, style])}>
             <Text style={StyleSheet.flatten([{ fontSize: 12, color: "white" }, valueStyle])}>{value}</Text>
         </View>
     )

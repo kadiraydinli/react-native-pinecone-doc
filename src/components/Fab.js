@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, View, Animated, Platform, TouchableWithoutFeedback } from 'react-native';
-import { Text, Icon } from '..';
+import { Text, Icon } from '.';
 
 const Fab = (props) => {
     const {
@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
         position: "absolute",
         ...Platform.select({
             android: { elevation: 2 },
-            default: {
+            ios: {
                 shadowColor: "#333",
                 shadowOpacity: 0.1,
                 shadowOffset: { x: 2, y: 0 },

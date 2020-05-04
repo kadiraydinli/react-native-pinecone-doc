@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, View, TouchableHighlight } from 'react-native';
-import { Text, IconButton, Avatar } from '..';
+import { Text, IconButton, Avatar } from '.';
 
 const ListItem = (props) => {
     const {
@@ -14,6 +14,7 @@ const ListItem = (props) => {
         onPress,
         onLongPress,
         Component = onPress || onLongPress ? TouchableHighlight : View,
+        backgroundColor,
         underlayColor,
         left,
         leftIcon,
@@ -33,12 +34,12 @@ const ListItem = (props) => {
 
     const selectedForLeft = (
         left && left ||
-        leftIcon && (<IconButton privateSize={leftIcon.size || 24} name={leftIcon.name} 
-            color={leftIcon.color} size={leftIcon.size || 24} type={leftIcon.type} onPress={leftIcon.onPress} 
-            onLongPress={leftIcon.onLongPress} onLongPressUnderlayColor={leftIcon.onLongPressUnderlayColor} 
+        leftIcon && (<IconButton privateSize={leftIcon.size || 24} name={leftIcon.name}
+            color={leftIcon.color} size={leftIcon.size || 24} type={leftIcon.type} onPress={leftIcon.onPress}
+            onLongPress={leftIcon.onLongPress} underlayColor={leftIcon.underlayColor}
             {...leftIconProps} />) ||
-        leftAvatar && (<Avatar source={leftAvatar.source} value={leftAvatar.value} 
-            valueStyle={leftAvatar.valueStyle} type={leftAvatar.type} backgroundColor={leftAvatar.backgroundColor} 
+        leftAvatar && (<Avatar source={leftAvatar.source} value={leftAvatar.value}
+            valueStyle={leftAvatar.valueStyle} type={leftAvatar.type} backgroundColor={leftAvatar.backgroundColor}
             size={leftAvatar.size || 40} onPress={onPress} {...leftAvatarProps} />)
     );
 
@@ -46,8 +47,8 @@ const ListItem = (props) => {
         right && right ||
         rightIcon && (<IconButton privateSize={rightIcon.size || 24} name={rightIcon.name} color={rightIcon.color}
             size={rightIcon.size} type={rightIcon.type} onPress={rightIcon.onPress} onLongPress={rightIcon.onLongPress}
-            onLongPressUnderlayColor={rightIcon.onLongPressUnderlayColor} {...rightIconProps} />) ||
-        rightText && (<Text style={[styles.rightText, rightTextStyle]} {...rightTextProps}>{rightText}</Text>)
+            underlayColor={rightIcon.underlayColor} {...rightIconProps} />) ||
+        rightText && (<Text style={StyleSheet.flatten([styles.rightText, rightTextStyle])} {...rightTextProps}>{rightText}</Text>)
     );
 
     const divider = [
@@ -56,16 +57,20 @@ const ListItem = (props) => {
     ];
 
     return (
-        <Component style={[styles.container, { borderColor: "#D1D1D6" }, divider]} onPress={onPress} onLongPress={onLongPress} underlayColor={underlayColor}>
+        <Component disabled={disabled}
+            style={[styles.container, { borderColor: "#D1D1D6" },
+            disabled ? { backgroundColor: "#000", opacity: .3 } : { backgroundColor: backgroundColor, opacity: 1 },
+                divider]}
+            onPress={onPress} onLongPress={onLongPress} underlayColor={underlayColor}>
             <>
                 {(left || leftIcon || leftAvatar) &&
                     <View style={{ marginRight: leftIcon && leftIcon.size <= 24 ? 32 : 16 }}>
                         {selectedForLeft}
                     </View>}
                 <View style={{ flex: 1 }}>
-                    <Text style={[styles.title, titleStyle]} {...titleProps}>{title}</Text>
+                    <Text style={StyleSheet.flatten([styles.title, titleStyle])} {...titleProps}>{title}</Text>
                     {description &&
-                        <Text style={[styles.description, descriptionStyle]} {...descriptionProps}>{description}</Text>}
+                        <Text style={StyleSheet.flatten([styles.description, descriptionStyle])} {...descriptionProps}>{description}</Text>}
                 </View>
                 {(right || rightIcon || rightText) &&
                     <View style={{ marginLeft: rightText ? 28 : 16 }}>
@@ -93,11 +98,13 @@ ListItem.propTypes = {
     onPress: PropTypes.func,
     /** Uzun dokunulunca gerçekleşecek işlem */
     onLongPress: PropTypes.func,
+    /** Arka plan rengi */
+    backgroundColor: PropTypes.string,
     /** Uzun dokunulurken görünecek renk */
     underlayColor: PropTypes.string,
     /** ListItem'ın sol element */
     left: PropTypes.element,
-    /** Sol ikon {name, color, size, type, onPress, onLongPress, onLongPressUnderlayColor} */
+    /** Sol ikon {name, color, size, type, onPress, onLongPress, underlayColor} */
     leftIcon: PropTypes.object,
     /** Sol Icon bileşeninin özel sahne donanımları */
     leftIconProps: PropTypes.object,
@@ -107,7 +114,7 @@ ListItem.propTypes = {
     leftAvatarProps: PropTypes.object,
     /** ListItem'ın sağ element */
     right: PropTypes.element,
-    /** Sağ ikon {name, color, size, type, onPress, onLongPress, onLongPressUnderlayColor} */
+    /** Sağ ikon {name, color, size, type, onPress, onLongPress, underlayColor} */
     rightIcon: PropTypes.object,
     /** Sağ Icon bileşeninin özel sahne donanımları */
     rightIconProps: PropTypes.object,
@@ -126,14 +133,16 @@ ListItem.propTypes = {
 };
 
 ListItem.defaultProps = {
-    underlayColor: "gray"
+    underlayColor: "gray",
+    backgroundColor: "white",
+    disabled: false
 };
 
 const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
         alignItems: "center",
-        backgroundColor: "red",
+        backgroundColor: "white",
         minHeight: 48,
         paddingLeft: 16,
         paddingRight: 16,

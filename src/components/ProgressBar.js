@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, View, Animated, Easing } from 'react-native';
-import { Text } from '..';
+import { Text } from '.';
 
 const INDETERMINATE_WIDTH_FACTOR = 0.3;
 const BAR_WIDTH_ZERO_POSITION =
@@ -49,7 +49,7 @@ const ProgressBar = (props) => {
 
     useEffect(() => {
         if (indeterminate) {
-            indeterminateAnimation();
+            //indeterminateAnimation();
         }
         else {
             const percentage = value / maxValue;
@@ -60,6 +60,7 @@ const ProgressBar = (props) => {
             if (animated) {
                 Animated.timing(progressValue, {
                     toValue: rowWidth,
+                    useNativeDriver: false
                     //duration: 1000
                 }).start();
             }
@@ -90,7 +91,7 @@ const ProgressBar = (props) => {
         <View onLayout={handledOnLayout} style={[ProgressBarStyle, containerStyle]} {...rest}>
             <Animated.View style={[StyleSheet.absoluteFill, { backgroundColor: filledColor, width: progressValue }]} />
             {showText ?
-                <Text style={[{ textAlign: "center", color: "gray" }, textStyle]} {...textProps}>
+                <Text style={StyleSheet.flatten([{ textAlign: "center", color: "gray" }, textStyle])} {...textProps}>
                     {text ? text : value / maxValue * 100 + "%"}
                 </Text>
                 : null}

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, View, Platform, TouchableOpacity, TouchableHighlight } from 'react-native';
-import { Icon } from "..";
+import { Icon } from ".";
 
 const IconButton = (props) => {
     const {
@@ -11,7 +11,7 @@ const IconButton = (props) => {
         backgroundColor,
         onPress,
         onLongPress,
-        onLongPressUnderlayColor,
+        underlayColor,
         raised,
         disabled,
         type,
@@ -23,10 +23,10 @@ const IconButton = (props) => {
     const privateSizeValue = privateSize ? privateSize : size * 2;
 
     return (
-        <Component disabled={disabled} onPress={onPress} onLongPress={onLongPress} underlayColor={onLongPressUnderlayColor}
+        <Component disabled={disabled} onPress={onPress} onLongPress={onLongPress} underlayColor={underlayColor}
             style={[{ width: privateSizeValue, height: privateSizeValue, backgroundColor: backgroundColor },
             styles.IconButton, raised && styles.raised, disabled && styles.disabled]}>
-            <Icon name={name} size={size} color={color} type={type} />
+            <Icon name={name} size={size} color={disabled ? "#000" : color} type={type} />
         </Component>
     )
 };
@@ -45,7 +45,7 @@ IconButton.propTypes = {
     /** Bileşene uzun dokununa gerçekleşecek işlem */
     onLongPress: PropTypes.func,
     /** Bileşen uzun dokunurken bileşenin rengi */
-    onLongPressUnderlayColor: PropTypes.string,
+    underlayColor: PropTypes.string,
     /** Bileşen gölgesi */
     raised: PropTypes.bool,
     /** Kullanıcı etkileşimini devre dışı bırakır */
@@ -58,7 +58,7 @@ IconButton.defaultProps = {
     name: "",
     size: 30,
     color: "black",
-    onLongPressUnderlayColor: "transparent",
+    underlayColor: "transparent",
     raised: false,
     disabled: false,
     type: "FontAwesome"
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
             android: {
                 elevation: 2
             },
-            default: {}
+            ios: {}
         }),
     },
     disabled: {

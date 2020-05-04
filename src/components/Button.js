@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, TouchableOpacity, TouchableHighlight, ActivityIndicator, Platform } from 'react-native';
-import { Text, Icon } from '..';
+import { Text, Icon } from '.';
 import Colors from '../config/Colors';
 
 const Button = (props) => {
@@ -42,7 +42,9 @@ const Button = (props) => {
         typeof shadow == 'number' ? {
             ...Platform.select({
                 android: { elevation: shadow },
-                default: { shadowOffSet: { 1: 1 } }
+                ios: { /*shadowOffSet: {
+                    width: 1, height: 1
+                }*/ }
             })
         } : typeof shadow == 'boolean' ? styles.shadow : null
     )
@@ -68,7 +70,8 @@ const Button = (props) => {
         type == "default" && styles.default, type == "transparent" && styles.transparent,
         type == "outline" && STYLES.outline, type == "rounded" && styles.rounded,
         size == "small" && styles.small, size == "medium" && styles.medium,
-        size == "large" && styles.large, shadowValue, selected, style
+        size == "large" && styles.large, shadowValue, selected,
+            { opacity: disabled ? .3 : 1 }, disabled && { backgroundColor: "#000" }, style
         ])} onPress={!loading ? onPress : null}
             onLongPress={!loading ? onLongPress : null} onShowUnderlay={onLongPressIn}
             onHideUnderlay={onLongPressOut} activeOpacity={opacity} underlayColor={underlayColor}>
@@ -84,7 +87,7 @@ const Button = (props) => {
                         size == "medium" && styles.mediumText,
                         size == "large" && styles.largeText,
                         type == "outline" && { color: color },
-                        type == "transparent" && { color: color }, titleStyle])}>{title}</Text>
+                        type == "transparent" && { color: color }, disabled && { color: "#000" }, titleStyle])}>{title}</Text>
                         {rightIcon && <Icon name={rightIcon.name} color={rightIcon.color ? rightIcon.color : "white"} size={rightIcon.size}
                             type={rightIcon.type} style={{ left: 5 }} />}
                     </>
@@ -114,7 +117,9 @@ Button.propTypes = {
     onPress: PropTypes.func,
     /** Bileşene uzun dokununa gerçekleşecek işlem */
     onLongPress: PropTypes.func,
+    /** Bileşene uzun dokunmaya başlarken gerçekleşek işlem */
     onLongPressIn: PropTypes.func,
+    /** Bileşene uzun dokunduktan sonra bırakıldığında gerçekleşek işlem */
     onLongPressOut: PropTypes.func,
     /** Buton gölge */
     shadow: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
@@ -166,8 +171,11 @@ const styles = StyleSheet.create({
             android: {
                 elevation: 1
             },
-            default: {
-                shadowOffSet: { 1: 1 }
+            ios: {
+                /*shadowOffSet: {
+                    width: 1,
+                    height: 1
+                }*/
             }
         })
     },

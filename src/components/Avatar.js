@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, Image, TouchableHighlight, View } from 'react-native';
-import { Text, Icon } from '../../src';
+import { Text, Icon } from '.';
 
 const avatarSizes = {
     small: 50,
@@ -18,22 +18,24 @@ const Avatar = (props) => {
         value,
         valueStyle,
         icon, //{name, color, size, type}
-        avatarStyle,
+        sourceStyle,
         backgroundColor,
         type,
         avatarMini,
         avatarMiniPosition,
         avatarMiniOnPress,
+        underlayColor,
         MiniComponent = avatarMiniOnPress ? TouchableHighlight : View,
         style,
+        ...rest
     } = props;
 
     const width = size ? typeof size == 'number' ? size : avatarSizes[size] : 50;
-    const fontSize = width / 2;
+    const fontSize = width / 2.3;
 
     const selectedType = [
-        type == "square" && { borderRadius: 3 },
-        type == "rounded" && { borderRadius: 70 }
+        type === "square" && { borderRadius: 3 },
+        type === "rounded" && { borderRadius: 70 }
     ];
 
     const avatarMiniStyle = { width: width / 3, height: width / 3, position: "absolute" };
@@ -49,16 +51,16 @@ const Avatar = (props) => {
         value && (<Text key={0} fontSize={fontSize} color="white" style={valueStyle}>{value}</Text>),
         icon && (<Icon key={1} name={icon.name} color={icon.color} size={icon.size ? icon.size : width / 2} type={icon.type} />),
         source && (<Image key={2} source={source} style={
-            StyleSheet.flatten([{ width: width, height: width }, selectedType, avatarStyle])} />)
+            StyleSheet.flatten([{ width: width, height: width }, selectedType, sourceStyle])} />)
     ];
 
     return (
-        <Component onPress={() => alert("kdlsfş")}
-            style={StyleSheet.flatten([styles.container, { width: width, height: width, backgroundColor: backgroundColor }, 
-                selectedType, style])}>
+        <Component onPress={onPress} underlayColor={underlayColor}
+            style={StyleSheet.flatten([styles.container, { width: width, height: width, backgroundColor: backgroundColor },
+                selectedType, style])} {...rest}>
             <>
                 {selectedComponent}
-                <MiniComponent onPress={avatarMiniOnPress}
+                <MiniComponent underlayColor="transparent" onPress={avatarMiniOnPress}
                     style={[avatarMiniStyle, avatarMiniPositionStyle]}>{avatarMini}</MiniComponent>
             </>
         </Component>
@@ -80,8 +82,8 @@ Avatar.propTypes = {
     valueStyle: PropTypes.object,
     /** Icon */
     icon: PropTypes.object,
-    /** Avatar stili */
-    avatarStyle: PropTypes.object,
+    /** Fotoğraf stili */
+    sourceStyle: PropTypes.object,
     /** Arkaplan rengi */
     backgroundColor: PropTypes.string,
     /** Avatar tipi */
@@ -92,6 +94,8 @@ Avatar.propTypes = {
     avatarMiniPosition: PropTypes.string,
     /** Bileşenin köşelerine yerleştirilecek elemente dokununca gerçekleşecek işlemi */
     avatarMiniOnPress: PropTypes.func,
+    /** Bileşene uzun dokunulurken görünecek renk */
+    underlayColor: PropTypes.string,
     MiniComponent: PropTypes.oneOf([View, TouchableHighlight]),
     /** Genel stil */
     style: PropTypes.object
@@ -100,7 +104,8 @@ Avatar.propTypes = {
 Avatar.defaultProps = {
     size: "medium",
     valueStyle: {},
-    avatarStyle: {},
+    sourceStyle: {},
+    backgroundColor: "gray",
     type: "rounded",
     avatarMiniPosition: "bottomRight",
     style: {}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, View, Animated, Easing, Platform } from 'react-native';
-import { Text, Button } from '..';
+import { Text, Button } from '.';
 
 const Snackbar = (props) => {
     const {
@@ -32,7 +32,8 @@ const Snackbar = (props) => {
         Animated.timing(animation, {
             toValue: visible ? (Platform.OS == "android" ? 20 : 0) : -100,
             duration: visible ? durationValues.visible : durationValues.inVisible,
-            easing: Easing.linear
+            easing: Easing.linear,
+            useNativeDriver: false
         }).start();
         return () => {
             animation.stopAnimation();
@@ -42,7 +43,7 @@ const Snackbar = (props) => {
     return (
         <Animated.View style={[styles.container, positionValue]}>
             <View style={[styles.view, { backgroundColor: backgroundColor }]}>
-                <Text style={[styles.text, textStyle]}>{text}</Text>
+                <Text style={StyleSheet.flatten([styles.text, textStyle])}>{text}</Text>
                 <Button opacity={0.5} onPress={actionOnPress} title={actionText}
                     type="transparent" style={actionStyle} titleStyle={actionTextStyle} />
             </View>
@@ -89,7 +90,7 @@ const styles = StyleSheet.create({
                 width: "95%",
                 alignSelf: "center"
             },
-            default: { width: "100%" }
+            ios: { width: "100%" }
         }),
         position: "absolute"
     },

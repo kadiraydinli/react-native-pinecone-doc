@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { TouchableOpacity } from 'react-native';
-import { Text, Icon } from "..";
+import { Text, Icon } from ".";
 
 const CheckBox = (props) => {
     const {
         iconType,
-        size,
         iconProps,
+        size,
         checked,
         title,
         titleLeft,
@@ -47,7 +47,7 @@ const CheckBox = (props) => {
                 color={disabled ? "#000" : (color ? color : (checked ? checkedColor : uncheckedColor))}
                 size={size}
                 style={ICON_STYLE} />
-            <Text style={[{ color: disabled ? "#000" : titleColor }, titleStyle]} {...titleProps}>{title}</Text>
+            <Text style={{ color: disabled ? "#000" : titleColor }, titleStyle} {...titleProps}>{title}</Text>
         </TouchableOpacity>
     )
 };
@@ -55,6 +55,8 @@ const CheckBox = (props) => {
 CheckBox.propTypes = {
     /** İkon tipi */
     iconType: PropTypes.string,
+    /** İkon bileşeninin özel sahne donanımlarına erişme */
+    iconProps: PropTypes.object,
     /** CheckBox işaretli olup olmaması */
     checked: PropTypes.bool.isRequired,
     /** CheckBox başlığı */
@@ -65,6 +67,8 @@ CheckBox.propTypes = {
     titleColor: PropTypes.string,
     /** Başlık stili */
     titleStyle: PropTypes.object,
+    /** Başlık bileşeninin özel sahne donanımlarına erişme */
+    titleProps: PropTypes.object,
     /** Dokununca gerçekleşecek işlem */
     onPress: PropTypes.func,
     /** Arkaplan rengi */
@@ -87,7 +91,8 @@ CheckBox.defaultProps = {
     iconType: "FontAwesome",
     checked: false,
     titleLeft: false,
-    color: "#000",
+    checkedColor: "#000",
+    uncheckedColor: "#000",
     disabled: false,
     size: 24
 };

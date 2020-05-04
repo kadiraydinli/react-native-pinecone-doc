@@ -1,7 +1,2 @@
-import Colors from './Colors';
-import Icons from './Icons';
-
-export {
-    Colors,
-    Icons
-}
+export { default as Colors } from "../../src/config/Colors";
+export { default as Icons } from "../../src/config/Icons";

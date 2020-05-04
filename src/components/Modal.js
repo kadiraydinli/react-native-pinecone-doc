@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, View, Modal as RNModal, TouchableOpacity, Dimensions, Image } from 'react-native';
-import { Text } from '..';
+import { Text } from '.';
 
 const width = Dimensions.get('window').width;
 
@@ -57,7 +57,7 @@ Modal.defaultProps = {
     height: null,
     backgroundColor: "white",
     borderStyle: { thickness: 1, color: "transparent", radius: 10 },
-    onRequestClose: {},
+    onRequestClose: () => {},
     containerStyle: {}
 };
 

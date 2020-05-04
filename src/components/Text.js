@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { StyleSheet, Text as RNText } from 'react-native';
 import { Colors } from '../config';
 
-const Text = props => {
+const Text = (props) => {
   const {
     h1,
     h2,
@@ -26,6 +26,7 @@ const Text = props => {
   return (
     <RNText
       style={StyleSheet.flatten([
+        fontSize && { fontSize: fontSize },
         h1 && { fontSize: 32 },
         h2 && { fontSize: 24 },
         h3 && { fontSize: 19 },
@@ -33,7 +34,6 @@ const Text = props => {
         h5 && { fontSize: 14 },
         h6 && { fontSize: 11 },
         color && { color: color },
-        fontSize && { fontSize: fontSize },
         primary && { color: Colors.primary },
         success && { color: Colors.success },
         info && { color: Colors.info },
@@ -93,8 +93,7 @@ Text.defaultProps = {
   danger: false,
   color: 'black',
   children: '',
-  fontSize: 16,
-  style: {},
+  fontSize: 16
 };
 
 export default Text;

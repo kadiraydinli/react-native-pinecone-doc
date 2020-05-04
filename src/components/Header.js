@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, View, StatusBar } from 'react-native';
-import { Text, IconButton } from '..';
+import { Text, IconButton } from '.';
 
 const Header = (props) => {
     const {
@@ -18,7 +18,11 @@ const Header = (props) => {
         statusBarColor,
         statusBarProps,
         leftIcon,
+        leftIconOnPress,
+        leftIconOnLongPress,
         rightIcon,
+        rightIconOnPress,
+        rightIconOnLongPress,
         containerStyle,
         leftContainer,
         leftContainerStyle,
@@ -46,24 +50,24 @@ const Header = (props) => {
         <>
             <StatusBar backgroundColor={statusBarColor} {...statusBarProps} />
             <View style={[{ backgroundColor: backgroundColor }, styles.container, containerStyle]}>
-                <View style={[styles.Views, leftContainerStyle]}>
+                <View style={[styles.Views, { alignItems: "flex-start" }, leftContainerStyle]}>
                     {!leftContainer && leftIcon ?
-                        (<IconButton {...leftIcon} />) :
+                        (<IconButton {...leftIcon} onPress={leftIconOnPress} onLongPress={leftIconOnLongPress} />) :
                         (leftContainer)}
                 </View>
                 <View style={[{ justifyContent: "center", alignItems: centerPlacementValue }, centerContainerStyle]}>
                     {!centerContainer ? (<>
-                        <Text style={[{ fontSize: 25, textAlign: titlePlacementValue, color: titleColor }, titleStyle]}>
+                        <Text style={StyleSheet.flatten([{ fontSize: 20, textAlign: titlePlacementValue, color: titleColor}, titleStyle])}>
                             {title}
                         </Text>
                         {subTitle ?
-                            <Text style={[{ fontSize: 15, textAlign: subTitlePlacementValue, color: subTitleColor }, subTitleStyle]}>
+                            <Text style={StyleSheet.flatten([{ fontSize: 15, textAlign: subTitlePlacementValue, color: subTitleColor }, subTitleStyle])}>
                                 {subTitle}
                             </Text> : null}
                     </>) : (centerContainer)}
                 </View>
-                <View style={[styles.Views, rightContainerStyle]}>
-                    {!rightContainer && rightIcon ? (<IconButton {...rightIcon} />) :
+                <View style={[styles.Views, { alignItems: "flex-end" }, rightContainerStyle]}>
+                    {!rightContainer && rightIcon ? (<IconButton {...rightIcon} onPress={rightIconOnPress} onLongPress={rightIconOnLongPress} />) :
                         (<>{rightContainer}</>)}
                 </View>
             </View>
@@ -98,8 +102,16 @@ Header.propTypes = {
     statusBarProps: PropTypes.object,
     /** Sol ikon {name, color, size, type, props} */
     leftIcon: PropTypes.object,
+    /** Sol ikona dokunuluna gerçekleşek işlem */
+    leftIconOnPress: PropTypes.func,
+    /** Sol ikona uzun dokunuluna gerçekleşek işlem */
+    leftIconOnLongPress: PropTypes.func,
     /** Sağ ikon {name, color, size, type, props} */
     rightIcon: PropTypes.object,
+    /** Sağ ikona dokunuluna gerçekleşek işlem */
+    rightIconOnPress: PropTypes.func,
+    /** Sağ ikona uzun dokunuluna gerçekleşek işlem */
+    rightIconOnLongPress: PropTypes.func,
     /** Genel stil */
     containerStyle: PropTypes.object,
     /** Sol kutucuk içerisine istenilen bileşenler tanımlanabilir. {<Text>Hello World</Text>} */
@@ -148,8 +160,7 @@ const styles = StyleSheet.create({
     },
     Views: {
         flex: 1,
-        justifyContent: "center",
-        alignItems: "center"
+        justifyContent: "center"
     }
 });
 

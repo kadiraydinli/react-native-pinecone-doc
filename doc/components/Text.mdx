@@ -5,28 +5,29 @@ menu: Components
 ---
 
 import { Playground, Props } from 'docz'
-import {Text} from '../../src'
+import {Text} from '../../src/components'
 
 # Text
+Metin görüntülemek için kullanılan bir bileşendir. React bileşeni olan “Text” bileşenini kullanılarak geliştirilmiştir.
 
-## Usage
+![Tux](../images/text.png)
 
-<Playground>
-  <Text>Some message</Text>
-</Playground>
+## Kullanımı
 
-<Playground>
-<Text fontSize={25} color="red">Some message</Text>
-</Playground>
+``` js
+import { Text } from 'react-native-pinecone'
 
-<Playground style={{flexDirection: "row"}}>
-  <Text primary>Some message</Text>
-  <Text success>Some message</Text>
-  <Text info>Some message</Text>
-  <Text danger>Some message</Text>
-  <Text warning>Some message</Text>
-</Playground>
+<Text h1>h1</Text>
 
-## Properties
+<Text h2>h2</Text>
+
+<Text fontSize={20}>fontSize: 20</Text>
+
+<Text color="red">color: red</Text>
+
+<Text primary>primary</Text>
+```
+
+## Sahne Donanımları (Props)
 
 <Props of={Text} />

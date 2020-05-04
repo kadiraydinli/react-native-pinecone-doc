@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, View, Platform, TouchableOpacity } from 'react-native';
-import { Text, Icon } from "..";
+import { Text, Icon } from ".";
 
 const RadioButton = (props) => {
     const {
@@ -60,12 +60,12 @@ const RadioButton = (props) => {
                     <View style={[RADIO, { borderColor: disabled ? "#000" : (index == selected ? isSelectedColor : color) }]}>
                         <View style={[RADIO_ROUND, { backgroundColor: index == selected ? isSelectedColor : "transparent" }]} />
                     </View>
-                    <Text style={[{
+                    <Text style={StyleSheet.flatten([{
                         color: disabled ? "#000" : (labelColor && selected != index ? labelColor :
                             index == selected ? isSelectedColor : color)
                     },
                     !disabled && (labelStyle, radio.labelStyle)
-                    ]}>{radio.label}</Text>
+                    ])}>{radio.label}</Text>
                 </TouchableOpacity>
             ))}
         </View>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, View, Animated, TextInput } from 'react-native';
-import { Text, IconButton } from '..';
+import { Text, IconButton } from '.';
 
 const Input = (props) => {
     const {
@@ -38,18 +38,19 @@ const Input = (props) => {
     useEffect(() => {
         Animated.timing(animation, {
             toValue: isFocused || value != '' ? 1 : 0,
-            duration: 200
+            duration: 200,
+            useNativeDriver: false
         }).start();
         return () => {
             animation.stopAnimation();
         }
     }, [isFocused]);
 
-    handleFocus = () => {
+    const handleFocus = () => {
         if (disabled || !props.editable) return;
         setIsFocused(true)
     };
-    handleBlur = () => {
+    const handleBlur = () => {
         if (disabled || !props.editable) return;
         setIsFocused(false)
     };
@@ -104,7 +105,7 @@ const Input = (props) => {
             <Animated.View style={[selectionType, { paddingTop: 5, backgroundColor: backgroundColor }]}>
                 <Animated.View style={labelPosition}>
                     {(type == "outlined" && (isFocused || value.length != 0) && label.length != 0) &&
-                        <View style={[styles.labelBackground, { backgroundColor: backgroundColor == "transparent" ? "white" : backgroundColor }]} />
+                        <View style={[styles.labelBackground, { backgroundColor: backgroundColor }]} />
                     }
                     <Animated.Text style={[outlinedStyle, labelStyle]}>
                         {editedLabel}
@@ -131,7 +132,7 @@ const Input = (props) => {
                 </View>
             </Animated.View>
             <View style={{ flexDirection: "row", justifyContent: "space-between", paddingLeft: 12, paddingRight: 8 }}>
-                <Text style={[{ color: !disabled ? (errorText ? "#b00020ff" : "#000") : disabledColor }, helperTextStyle, errorTextStyle]}>{helperText || errorText}</Text>
+                <Text style={{ color: !disabled ? (errorText ? "#b00020ff" : "#000") : disabledColor }, helperTextStyle, errorTextStyle}>{helperText || errorText}</Text>
                 {characterCounter && <Text>{value.length} / {maxLength}</Text>}
             </View>
         </View>
@@ -184,7 +185,7 @@ Input.defaultProps = {
     label: "",
     labelColor: "blue",
     selectionColor: "blue",
-    backgroundColor: "transparent",
+    backgroundColor: "white",
     characterCounter: false,
     disabled: false,
     disabledColor: "#B3B3B3",

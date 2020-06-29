@@ -19,6 +19,7 @@
   "author": "Kadir Aydınlı",
   "license": "MIT",
   "dependencies": {
+    "favicons-webpack-plugin": "^3.0.1",
     "react": "^16.12.0",
     "react-native": "^0.61.5",
     "react-native-vector-icons": "^6.6.0",

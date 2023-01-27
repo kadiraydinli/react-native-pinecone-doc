@@ -5,4 +5,3 @@ yarn-debug.log*
 yarn-error.log*
 node_modules/
 .docz/
-yarn.lock

@@ -5,9 +5,6 @@ const PUBLIC = path.resolve(__dirname, "public");
 const SRC = path.resolve(__dirname, "src");
 
 /*
-console.log("laaaaaa",PUBLIC);
-
-
 const modifyBundlerConfig = (config) => {
   /* config.resolve.alias = Object.assign({}, config.resolve.alias, {
     "@fonts": `${PUBLIC}/fonts`,
@@ -16,7 +13,7 @@ const modifyBundlerConfig = (config) => {
     "@styles": `${SRC}/theme/styles`,
   }); */
 
-  /*config.plugins.push(
+/*config.plugins.push(
     new FaviconsWebpackPlugin({
       logo: `${PUBLIC}/favicon.ico`,
       inject: true,
@@ -30,7 +27,7 @@ export default {
   title: "React Native Pinecone",
   description: "Cross Platform React Native UI Toolkit",
   dest: "./docs",
-  base: "/react-native-pinecone",
+  base: "/",
   public: "./public",
   indexHtml: "public/index.html",
   htmlContext: {

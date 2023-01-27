@@ -13,32 +13,32 @@ React bileşeni olan “TouchableOpacity” bileşeni kullanılarak geliştirilm
 
 ![Tux](../images/card.png)
 
-## Kullanımı
+## Usage
 
 ``` js
-import { Card } from 'react-native-pinecone'
+import { Card } from 'react-native-pinecone';
 
-<Card 
-    title="Card" 
-    description="Açıklama" 
+<Card
+    title="Card"
+    description="Dokunuldu"
     onPress={() => alert("Dokunuldu")} />
 
-<Card 
-    title="Card 4" 
-    description="Açıklama" 
-    supportText="Destek metini" 
-    onLongPress={() => alert("Uzun dokunuldu")} 
+<Card
+    title="Card 4"
+    description="Description"
+    supportText="Support Text"
+    onLongPress={() => alert("Uzun dokunuldu")}
     image={{ uri: "https://cdn.pixabay.com/photo/2019/10/04/18/36/milky-way-4526277_960_720.jpg" }} />
 
-<Card 
-    title="Card 6" 
-    description="Açıklama" 
-    onPress={() => alert("Dokunuldu")} 
-    image={{uri: "https://cdn.pixabay.com/photo/2020/04/18/17/17/fantasy-5060076_960_720.jpg"}} 
-    actionButtonOnPress={() => alert("Dokunuldu")} 
+<Card
+    title="Card 6"
+    description="Description" 
+    onPress={() => alert("Dokunuldu")}
+    image={{uri: "https://cdn.pixabay.com/photo/2020/04/18/17/17/fantasy-5060076_960_720.jpg"}}
+    actionButtonOnPress={() => alert("Dokunuldu")}
     imageTitle="Doğa" />
 ```
 
-## Sahne Donanımları (Props)
+## Props
 
 <Props of={Card} />

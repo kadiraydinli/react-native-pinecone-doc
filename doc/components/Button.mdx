@@ -13,52 +13,52 @@ React bileşeni olan “TouchableOpacity” ve “TouchableHighlight” bileşen
 
 ![Tux](../images/buton.png)
 
-## Kullanımı
+## Usage
 
 ``` js
-import { Button } from 'react-native-pinecone'
+import { Button } from 'react-native-pinecone';
 
-<Button 
-    title="Default" 
-    type="default" 
+<Button
+    title="Default"
+    type="default"
     onPress={() => alert("Dokunuldu")} />
 
-<Button 
-    title="Raised" 
-    shadow={3} 
-    type="default" 
+<Button
+    title="Raised"
+    shadow={3}
+    type="default"
     onLongPress={() => alert("Uzun dokunuldu")} />
 
-<Button 
-    title="Rounded" 
-    type="rounded" 
-    color="green" 
+<Button
+    title="Rounded"
+    type="rounded"
+    color="green"
     onPress={() => alert("Dokunuldu")} />
 
-<Button 
-    title="Transparent" 
-    type="transparent" 
-    color="darkred" 
+<Button
+    title="Transparent"
+    type="transparent"
+    color="darkred"
     onPress={() => alert("Dokunuldu")} />
 
-<Button 
-    title="Outline" 
-    type="outline" 
-    color="red" 
+<Button
+    title="Outline"
+    type="outline"
+    color="red"
     onPress={() => alert("Dokunuldu")} />
 
-<Button 
-    title="Loading" 
-    loading 
-    loadingStyle={{ color: "white" }} 
+<Button
+    title="Loading"
+    loading
+    loadingStyle={{ color: "white" }}
     onPress={() => alert("Dokunuldu")}  />
 
-<Button 
-    title="Disabled" 
-    disabled 
-    onPress={() => alert("dokunuldu")} />
+<Button
+    title="Disabled"
+    disabled
+    onPress={() => alert("Dokunuldu")} />
 ```
 
-## Sahne Donanımları (Props)
+## Props
 
 <Props of={Button} />

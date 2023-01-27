@@ -13,40 +13,40 @@ React bileşeni olan “TouchableHighlight” ve “View” bileşenleri kullan�
 
 ![Tux](../images/list.png)
 
-## Kullanımı
+## Usage
 
 ``` js
-import { ListItem } from 'react-native-pinecone'
+import { ListItem } from 'react-native-pinecone';
 
-<ListItem 
-    title="Liste - Avatar: value" 
-    leftAvatar={{ value: "KA" }} 
-    description="Açıklama" 
+<ListItem
+    title="Liste - Avatar: value"
+    leftAvatar={{ value: "KA" }}
+    description="Açıklama"
     onPress={() => alert("Dokunuldu")} />
 
-<ListItem 
-    title="Liste - Avatar: source - Disabled" 
+<ListItem
+    title="Liste - Avatar: source - Disabled"
     disabled
-    leftAvatar={{source:{required("./user.png")}}} 
-    description="Açıklama" 
+    leftAvatar={{source:{required("./user.png")}}}
+    description="Açıklama"
     onPress={() => alert("Dokunuldu")} />
 
-<ListItem 
-    title="Liste - Avatar: source - Sağ icon" 
-    leftAvatar={{source:{ required("./user2.png")}}} 
-    description="Açıklama" 
-    onPress={() => alert("Dokunuldu")} 
+<ListItem
+    title="Liste - Avatar: source - Sağ icon"
+    leftAvatar={{source:{ required("./user2.png")}}}
+    description="Açıklama"
+    onPress={() => alert("Dokunuldu")}
     rightIcon={{ name: "facebook", color: "#4A6CA7" }} />
     
-<ListItem 
-    title="Liste - Avatar: source - Sağ yazı - Arka plan" 
-    leftAvatar={{source:{ required("./user.png")}}} 
-    description="Açıklama" 
-    backgroundColor="#DC3545" 
-    onPress={() => alert("Dokunuldu")} 
+<ListItem
+    title="Liste - Avatar: source - Sağ yazı - Arka plan"
+    leftAvatar={{source:{ required("./user.png")}}}
+    description="Açıklama"
+    backgroundColor="#DC3545"
+    onPress={() => alert("Dokunuldu")}
     rightText="Kişi" />
 ```
 
-## Sahne Donanımları (Props)
+## Props
 
 <Props of={ListItem} />

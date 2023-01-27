@@ -12,29 +12,29 @@ React bileşeni olan “Modal” bileşeni kullanılarak geliştirilmiştir.
 
 ![Tux](../images/modal.png)
 
-## Kullanımı
+## Usage
 
 ``` js
-import React from 'react'
-import { View } from 'react-native'
-import { Modal, Button } from 'react-native-pinecone'
+import React from 'react';
+import { View } from 'react-native';
+import { Modal, Button } from 'react-native-pinecone';
 
 const [visible, setVisible] = useState(false);
 
-<Button 
-    title="Modal - onRequestClose ile" 
+<Button
+    title="Modal - onRequestClose ile"
     onPress={() => setVisible(!visible)} />
 
 <Modal visible={visible} onRequestClose={() => setVisible(!visible)}>
     <View style={{ padding: 20 }}>
         <Text>Hello World</Text>
-        <Button 
-            title="Dokun" 
+        <Button
+            title="Dokun"
             onPress={() => alert("Dokunuldu")} />
     </View>
 </Modal>
 ```
 
-## Sahne Donanımları (Props)
+## Props
 
 <Props of={Modal} />

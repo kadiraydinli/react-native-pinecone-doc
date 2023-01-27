@@ -13,20 +13,20 @@ React bileşeni olan “Animated.View” bileşeni kullanılarak geliştirilmiş
 
 ![Tux](../images/snack.png)
 
-## Kullanımı
+## Usage
 
 ``` js
-import React from 'react'
-import { Snackbar } from 'react-native-pinecone'
+import React from 'react';
+import { Snackbar } from 'react-native-pinecone';
 
 const [visible, setVisible] = useState(false);
 
-<Snackbar 
+<Snackbar
     visible={visible}
-    actionOnPress={() => alert("Dokunuldu")} 
+    actionOnPress={() => alert("Dokunuldu")}
     text="SnackBar - Bottom" />
 ```
 
-## Sahne Donanımları (Props)
+## Props
 
 <Props of={Snackbar} />

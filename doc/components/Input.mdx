@@ -13,41 +13,41 @@ React bileşeni olan “TextInput” bileşeni kullanılarak geliştirilmiştir.
 
 ![Tux](../images/input.png)
 
-## Kullanımı
+## Usage
 
 ``` js
-import React from 'react'
-import { Input } from 'react-native-pinecone'
+import React from 'react';
+import { Input } from 'react-native-pinecone';
 
 const [value, setValue] = useState(""); 
 
-<Input 
-    value={value} 
-    type="outlined" 
-    labelColor="green" 
-    label="Label - HelperText" 
-    onChangeText={(value) => setValue(value)} 
-    helperText="Hello World" 
+<Input
+    value={value}
+    type="outlined"
+    labelColor="green"
+    label="Label - HelperText"
+    onChangeText={(value) => setValue(value)}
+    helperText="Hello World"
     leftIcon={{ name: "user", color: "green" }} />
 
-<Input 
-    value={value} 
-    type="outlined" 
-    labelColor="green" 
-    label="Label - ErrorText" 
-    onChangeText={(value) => setValue(value)} 
-    errorText="Error Text" 
+<Input
+    value={value}
+    type="outlined"
+    labelColor="green"
+    label="Label - ErrorText"
+    onChangeText={(value) => setValue(value)}
+    errorText="Error Text"
     rightIcon={{ name: "eye" }} />
 
-<Input 
-    value={value} 
-    type="outlined" 
-    label="Label - Karakter Sayısı" 
-    onChangeText={(value) => setValue(value)} 
-    characterCounter 
+<Input
+    value={value}
+    type="outlined"
+    label="Label - Karakter Sayısı"
+    onChangeText={(value) => setValue(value)}
+    characterCounter
     maxLength={10} />
 ```
 
-## Sahne Donanımları (Props)
+## Props
 
 <Props of={Input} />

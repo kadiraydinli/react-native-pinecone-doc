@@ -12,11 +12,11 @@ React bileşeni olan “TouchableOpacity” bileşeni kullanılarak geliştirilm
 
 ![Tux](../images/radio.png)
 
-## Kullanımı
+## Usage
 
 ``` js
-import React from 'react'
-import { RadioButton } from 'react-native-pinecone'
+import React from 'react';
+import { RadioButton } from 'react-native-pinecone';
 
 const [visible, setVisible] = useState(false); 
 
@@ -26,21 +26,21 @@ const radio = [
     { label: "Button", value: 2 }
 ]
 
-<RadioButton 
-    values={radio} 
+<RadioButton
+    values={radio}
     onPress={(value) => setValue(value)} />
 
-<RadioButton 
-    values={radio} 
-    labelHorizontal={false} 
+<RadioButton
+    values={radio}
+    labelHorizontal={false}
     onPress={(value) => setValue(value)} />
 
-<RadioButton 
-    values={radio} 
+<RadioButton
+    values={radio}
     selectedColor="blue"
     onPress={(value) => setValue(value)} />
 ```
 
-## Sahne Donanımları (Props)
+## Props
 
 <Props of={RadioButton} />

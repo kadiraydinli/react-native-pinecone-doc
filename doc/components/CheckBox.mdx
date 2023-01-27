@@ -12,35 +12,35 @@ React bileşeni olan “TouchableOpacity” ve react-native-vector-icons paket b
 
 ![Tux](../images/check.png)
 
-## Kullanımı
+## Usage
 
 ``` js
-import React from 'react'
-import { CheckBox } from 'react-native-pinecone'
+import React from 'react';
+import { CheckBox } from 'react-native-pinecone';
 
 const [visible, setVisible] = useState(false); 
 
-<CheckBox 
-    checked={visible} 
-    title="Check" 
+<CheckBox
+    checked={visible}
+    title="Check"
     onPress={() => setVisible(!visible)} />
 
-<CheckBox 
-    checked={visible} 
-    title="unCheck" 
+<CheckBox
+    checked={visible}
+    title="unCheck"
     onPress={() => setVisible(!visible)} />
 
-<CheckBox 
-    checked={visible} 
-    title="unCheck - Title Left" 
+<CheckBox
+    checked={visible}
+    title="unCheck - Title Left"
     titleLeft onPress={() => setVisible(!visible)} />
 
-<CheckBox 
-    checked={visible} 
-    title="CheckBox - titleStyle" 
+<CheckBox
+    checked={visible}
+    title="CheckBox - titleStyle"
     titleStyle={{ fontSize: 25 }} />
 ```
 
-## Sahne Donanımları (Props)
+## Props
 
 <Props of={CheckBox} />
